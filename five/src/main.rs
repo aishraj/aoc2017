@@ -7,23 +7,24 @@ fn main() {
     let arr_size = arr.len();
     let mut i = 0;
     let mut c = 0;
-    while i < arr_size {
-        //println!("Array is {:?}", arr);
-        //      println!("i is: {:?}", i);
-
+    while ( i < arr_size || i < 0) {
         let t = arr[i];
-        arr[i] = arr[i] + 1;
+       // arr[i] = arr[i] + 1;
         if t < 0 {
+            arr[i] = arr[i] + 1;
             let t_value = t.abs();
             let t_value = t_value as usize;
             i = i - t_value;
         } else {
+            if t >= 3 {
+                arr[i] = arr[i] - 1;
+            } else {
+                arr[i] = arr[i] + 1;
+            }
             let t_value = t as usize;
             i = i + t_value;
         }
         c += 1;
-        //println!("i is: {:?}", i);
-
     }
     //println!("Array is {:?}", arr);
     println!("Number of steps is: {:?}", c);
