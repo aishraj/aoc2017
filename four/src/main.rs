@@ -25,5 +25,21 @@ fn solve_part_one() -> i32 {
 }
 
 fn solve_part_two() -> i32 {
-    return 0;
+    let f = File::open("./input.txt").expect("Unable to open the file");
+    let f = BufReader::new(f);
+    let mut running_total :i32 = 0;
+    for line in f.lines() {
+        let line_item = line.expect("Unable to read line");
+        let items: Vec<String> = line_item.split_whitespace().map(|word| {
+            let mut chars: Vec<char> = word.chars().collect();
+            chars.sort_by(|a, b| b.cmp(a));
+            String::from_iter(chars)
+        }).collect();
+        let vec_len = items.len();
+        let uniques: HashSet<String> = HashSet::from_iter(items);
+        if vec_len == uniques.len() {
+            running_total += 1;
+        }
+    }
+    return running_total;
 }
